@@ -1,0 +1,44 @@
+.img{
+    width: 300px;
+    height: 400px;
+    margin-top: 50px;
+    background-image: url("img/boca.jpg");
+    background-size: cover;
+    background-position:center ;
+    position:relative;
+    overflow:hidden;
+}
+.img:hover::after{
+    transform:translateY(0);
+}
+.img::after{
+    content:"boca";
+    font-size: 2rem;
+    color:white;
+    background-color: aquamarine;
+    position: absolute;
+    inset:0;
+    display:grid;
+    place-items: center;
+    transform: translateY(100%);
+    transition:transform .3s;
+}
+section{
+    display: flex;
+    width: auto;
+    height: 160px;
+    margin: 100px;
+}
+section img{
+    width: 0px;
+    flex-grow: 1;
+    object-fit: cover;
+    opacity:.8 ;
+    transition: .5s ease;
+}
+section img:hover{
+    cursor:auto;
+    width: 200px;
+    opacity: 1;
+    filter:contrast(120%);
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="hoverheader.css">
+    <link rel="icon" type="image/jpg"
+        href="https://static.vecteezy.com/system/resources/previews/009/784/979/non_2x/soccer-ball-icon-isolated-on-white-background-free-vector.jpg" />
+    <!-- Importar fuente roboto de google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <!-- -------------------------------------- -->
+    <title>Somos deporte</title>
+</head>
+<header>
+    <h1>
+        <!-- <img src="https://img.freepik.com/psd-premium/balon-futbol-aislado-render-3d_286925-255.jpg"> -->
+        <img
+            src="https://w7.pngwing.com/pngs/260/649/png-transparent-fc-barcelona-football-drawing-futsal-pelota-futbol-game-monochrome-sports-equipment.png">
+        <b>Somos deporte</b>
+
+    </h1>
+    <!-- ---------------------------------------------------- -->
+    <nav>
+        <a href="index.html">INICIO</a>
+        <a href="listado.html">LISTADO</a>
+        <a href="altas.html">ALTAS</a>
+        <a href="eliminar.html">ELIMINAR</a>
+        <a href="modificar.html">MODIFICAR</a>
+        <div class="animation start-listado"></div>
+    </nav>
+    <!-- ---------------------------------------------------- -->
+</header>
+<!-- ----------------------------------------------------  ---------------------------------------------------- -->
+
+<body>
+    <h1>LISTA DE JUGADORES</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Id_Jugador</th>
+                <th>Jugador</th>
+                <th>Posicion</th>                
+                <th>Equipo</th>                
+                <th align="right">Liga</th>                
+                <th>Valor de mercado</th>
+            </tr>
+        </thead>
+        <tbody id="tablaProductos"> </tbody>
+    </table>
+
+    
+    <script>
+        //const URL = "http://127.0.0.1:5000/"
+        //const URL = "https://arielfsp.pythonanywhere.com/"
+        //const URL="https://prueba23513.pythonanywhere.com/"
+        // Realizamos la solicitud GET al servidor para obtener todos los productos
+        
+        const URL = "http://127.0.0.1:5000/";
+
+        fetch(URL + 'futbolintenacional')
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                }
+            })
+            .then(function (data) {
+                let tablaProductos = document.getElementById('tablaProductos');
+
+                for (let jugador of data) {
+                    let fila = document.createElement('tr');
+                    fila.innerHTML = '<td>' + jugador.Id_Jugador + '</td>' +
+                        '<td>' + jugador.Jugador + '</td>' +
+                        '<td>' + jugador.Equipo + '</td>' +
+                        '<td>' + jugador.Posicion + '</td>' +
+                        '<td>' + jugador.Liga + '</td>' +
+                        '<td>' + jugador.valor + '</td>';
+                    tablaProductos.appendChild(fila);
+                }
+            })
+            .catch(function (error) {
+                alert('Error al obtener los jugadores.');
+            });
+    </script>
+</body>
+</html>

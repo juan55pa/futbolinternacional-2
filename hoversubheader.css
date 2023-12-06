@@ -1,0 +1,163 @@
+/* Posicionamiento del nav */
+nav {
+	margin: 0 auto 0;
+	border: 1px solid;
+	border-color: white;
+	position: relative;
+	width: auto;
+	height: auto;
+	background-color: #34495e;
+	border-radius: 0px;
+	font-size: 0;
+}
+
+/* Seleccion de los "a" dentro del "nav" */
+nav a {
+	line-height: 50px;
+	height: 100%;
+	font-size: 15px;
+	display: inline-flex;
+	position: relative;
+	z-index: 1;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+}
+
+/* Posicionamiento del nav */
+.submenu {
+	margin: 0 auto 0;
+	border: .3px solid;
+	border-color: white;
+	position: relative;
+	width: auto;
+	height: auto;
+	background-color: #34495e;
+	border-radius: 0px;
+	font-size: 0;
+}
+
+/* Seleccion de los "a" dentro del "nav" */
+.submenu > a {
+	line-height: 30px;
+	height: 100%;
+	font-size: 12px;
+	display: inline-flex;
+	position: relative;
+	z-index: 1;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+}
+/* La animacion */
+nav .animation {
+	position: absolute;
+	height: 100%;
+	top: 0;
+	z-index: 0;
+	transition: all .5s ease 0s;
+	/* border-radius: 8px; */
+}
+
+
+/* ----------------------------------------------------------------------------- */
+
+/* ------SUBMENU------------------------------------------------------- */
+ /* Separador de primera division */
+.submenu> a:nth-child(1) {
+	width: 17%;
+}
+/* Separador de primera nacional B */
+.submenu> a:nth-child(2) {
+	width: 20%;
+}
+/* Separador de Primera B */
+.submenu> a:nth-child(3) {
+	width: 16%;
+}
+/* Separador de Primera C */
+.submenu> a:nth-child(4) {
+	width: 16%;
+}
+/* Separador de Primera D */
+.submenu> a:nth-child(5) {
+	width: 15%;
+}
+/* Separador de Federal A */
+.submenu> a:nth-child(6) {
+	width: 15%;
+}
+/* ------ANIMACION CAMPEONATOS------------ */
+/* Animacion de primera division */
+.submenu .start-primeradivision, a:nth-child(1):hover~.animation {
+	width: 10%;
+	left: 0px;
+	background-color: #f3ccaa3e;
+}
+/* Animacion de futbol argentino */
+.submenu .start-primeranacionalb, a:nth-child(2):hover~.animation {
+	width: 12%;
+	left: 16.3%;
+	background-color: #f3ccaa3e;
+}
+/* Animacion de messi */
+.submenu .start-primerab, a:nth-child(3):hover~.animation {
+	width: 7%;
+	left: 36%;
+	background-color: #f3ccaa3e;
+}
+/* Animacion de campeones */
+.submenu .start-primerac, a:nth-child(4):hover~.animation {
+	width: 7%;
+	left: 52%;
+	background-color: #f3ccaa3e;
+}
+/* Animacion de nosotros */
+.submenu .start-primerad, a:nth-child(5):hover~.animation {
+	width: 7%;
+	left: 68%;
+	background-color: #f3ccaa3e;
+}
+/* Animacion de suscribirse */
+.submenu .start-federala, a:nth-child(6):hover~.animation {
+	width: 10%;
+	left: 83.5%;
+	background-color: #f3ccaa3e;
+}
+
+
+/* ---------------------- RESPONSIVE -------------------------------------*/
+@media(max-width: 768px){
+	
+	nav a {
+		display: flex;
+		height: 100%;
+		font-size: 1rem;
+		position: relative;
+		z-index: 1;
+		text-decoration: underline;
+		text-transform: uppercase;
+		text-align: center;
+		color: white;
+		cursor: pointer;
+	}
+	.submenu a {
+		display: flex;
+		height: 100%;
+		font-size: 1rem;
+		position: relative;
+		z-index: 1;
+		text-decoration: underline;
+		text-transform: uppercase;
+		text-align: center;
+		color: white;
+		cursor: pointer;
+	}
+}
+@media(min-width: 1440) {
+		
+}

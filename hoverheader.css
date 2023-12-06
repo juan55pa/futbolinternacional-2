@@ -1,0 +1,184 @@
+/* Posicionamiento del nav */
+nav {
+	margin: 0 auto 0;
+	border: 1px solid;
+	border-color: white;
+	position: relative;
+	width: auto;
+	height: auto;
+	background-color: #34495e;
+	border-radius: 0px;
+	font-size: 0;
+}
+
+/* Seleccion de los "a" dentro del "nav" */
+nav a {
+	line-height: 50px;
+	height: 100%;
+	font-size: 15px;
+	display: inline-flex;
+	position: relative;
+	z-index: 1;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+}
+
+/* Posicionamiento del nav */
+.submenu {
+	margin: 0 auto 0;
+	border: .3px solid;
+	border-color: white;
+	position: relative;
+	width: auto;
+	height: auto;
+	background-color: #34495e;
+	border-radius: 0px;
+	font-size: 0;
+}
+
+/* Seleccion de los "a" dentro del "nav" */
+.submenu > a {
+	line-height: 30px;
+	height: 100%;
+	font-size: 12px;
+	display: inline-flex;
+	position: relative;
+	z-index: 1;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+}
+/* La animacion */
+nav .animation {
+	position: absolute;
+	height: 100%;
+	top: 0;
+	z-index: 0;
+	transition: all .5s ease 0s;
+	/* border-radius: 8px; */
+}
+
+
+/* ----------------------------------------------------------------------------- */
+
+/* Son selectores, selector 1,2,3,4,5 para marcar la distancia entre palabras
+ pero tambien puede usarse para que tome colores, este caso marca la distancia entre elementos del header */
+
+ /* Separador de inicio */
+a:nth-child(1) {
+	width: 10%;
+}
+/* Separador de futbol argentino */
+a:nth-child(2) {
+	width: 22%;
+}
+/* Separador de messi */
+a:nth-child(3) {
+	width: 16%;
+}
+/* Separador de campeones */
+a:nth-child(4) {
+	width: 16%;
+}
+/* Separador de nosotros */
+a:nth-child(5) {
+	width: 16%;
+}
+/* Separador de suscribirse */
+a:nth-child(6) {
+	width: 16%;
+}
+/* ----------------------------------------------------------------------------- */
+/* En estos, indicamos segun el nth-child() que es el selector, de que tamano es la animacion
+hover animation indica que es el tamano del cuadro de desplazamiento, que tamano tiene y que posicion queda */
+
+/* class="animation start-home segun la clase, va a ser donde se ubique el indicador de la pagina, 
+por ende aca indicamos: 
+
+- nav (seccion nav)
+
+- .start-home(futbolargentino, messi, internacional, nosotros)
+
+indica que seccion se va a encontrar el cursor
+,
+- a:nth-child() 
+
+es la funcion selectora: hover-animation es para indicar que la animacion se hace en ese contexto
+color, distancia de la pantalla, y ancho de la animacion */
+
+/*---------- Posiciones y tamaños de la animacion ----------*/
+
+/* Animacion de inicio */
+nav .start-home, a:nth-child(1):hover~.animation {
+	width: 4.2%;
+	left: 0;
+	background-color: #f3ccaa3e;
+}
+/* Animacion de futbol argentino */
+nav .start-listado, a:nth-child(2):hover~.animation {
+	width: 14%;
+	left: 9%;
+	background-color: #f3ccaa3e;
+}
+/* Animacion de messi */
+nav .start-altas, a:nth-child(3):hover~.animation {
+	width: 6%;
+	left: 31%;
+	background-color: #f3ccaa3e;
+}
+/* Animacion de campeones */
+nav .star-eliminar, a:nth-child(4):hover~.animation {
+	width: 8.5%;
+	left: 47.5%;
+	background-color: #f3ccaa3e;
+}
+/* Animacion de nosotros */
+nav .start-modificar, a:nth-child(5):hover~.animation {
+	width: 8%;
+	left: 63.5%;
+	background-color: #f3ccaa3e;
+}
+/* Animacion de suscribirse
+nav .start-contact, a:nth-child(6):hover~.animation {
+	width: 8.6%;
+	left: 79.5%;
+	background-color: #f3ccaa3e;
+} */
+
+
+/* ---------------------- RESPONSIVE -------------------------------------*/
+@media(max-width: 768px){
+	
+	nav a {
+		display: flex;
+		height: 100%;
+		font-size: 1rem;
+		position: relative;
+		z-index: 1;
+		text-decoration: underline;
+		text-transform: uppercase;
+		text-align: center;
+		color: white;
+		cursor: pointer;
+	}
+	.submenu a {
+		display: flex;
+		height: 100%;
+		font-size: 1rem;
+		position: relative;
+		z-index: 1;
+		text-decoration: underline;
+		text-transform: uppercase;
+		text-align: center;
+		color: white;
+		cursor: pointer;
+	}
+}
+@media(min-width: 1440) {
+		
+}

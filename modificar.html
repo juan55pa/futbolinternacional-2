@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="hoverheader.css">
+    <link rel="icon" type="image/jpg"
+        href="https://static.vecteezy.com/system/resources/previews/009/784/979/non_2x/soccer-ball-icon-isolated-on-white-background-free-vector.jpg" />
+    <!-- Importar fuente roboto de google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <!-- -------------------------------------- -->
+    <title>Somos deporte</title>
+</head>
+<header>
+    <h1>
+        <!-- <img src="https://img.freepik.com/psd-premium/balon-futbol-aislado-render-3d_286925-255.jpg"> -->
+        <img
+            src="https://w7.pngwing.com/pngs/260/649/png-transparent-fc-barcelona-football-drawing-futsal-pelota-futbol-game-monochrome-sports-equipment.png">
+        <b>Somos deporte</b>
+
+    </h1>
+    <!-- ---------------------------------------------------- -->
+    <nav>
+        <a href="index.html">INICIO</a>
+        <a href="listado.html">LISTADO</a>
+        <a href="altas.html">ALTAS</a>
+        <a href="eliminar.html">ELIMINAR</a>
+        <a href="modificar.html">MODIFICAR</a>
+        <div class="animation start-modificar"></div>
+    </nav>
+    <!-- ---------------------------------------------------- -->
+</header>
+<!-- ----------------------------------------------------  --------------->
+<body>
+    <div id="app" class="formularios">
+        <h3 style="text-align: center;">MODIFICAR INFORMACION DE JUGADORES</h3>
+    
+        <form @submit.prevent="obtenerProducto" class="formularios">
+            <div class="dentro_formularios">
+                <label for="Id_Jugador">Id_Jugador:</label>
+            </div>
+            <div>
+                <input type="number" v-model="Id_Jugador" required>
+            </div>
+            <div class="dentro_formularios" style="text-align: center;">
+                <button type="submit" class="button">Modificar</button>
+            </div>
+        </form>
+    
+        <div v-if="mostrarDatosProducto">
+            <form @submit.prevent="guardarCambios" class="formularios">
+                <div>
+                    <label for="descripcionModificar">Jugador:</label>
+                    <input type="text" id="descripcionModificar" v-model="Jugador" required><br>
+                </div>
+                <div>
+                    <label for="cantidadModificar">Equipo:</label>
+                    <input type="text" id="cantidadModificar" v-model="Equipo" required><br>
+                </div>
+                <div>
+                    <label for="posicionModificar">Posicion:</label>
+                    <input type="text" id="posicionModificar" v-model="Posicion" required><br> 
+                </div>
+                <div>
+                    <label for="ligaModificar">Liga:</label>
+                    <input type="text" id="ligaModificar" v-model="Liga" required><br>
+                </div>
+                <div>
+                    <label for="valorModificar">Valor:</label>
+                    <input type="number" step="10000" id="valorModificar" v-model="valor" required><br>
+                </div>
+                <div style="text-align: center;">
+                    <button type="submit">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const URL = "http://127.0.0.1:5000/"
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    Id_Jugador: '',
+                    Jugador: '',
+                    Equipo: '',
+                    Posicion: '',
+                    Liga: '',
+                    valor: " ",
+                    mostrarDatosProducto: false,
+                };
+            },
+            methods: {
+                obtenerProducto() {
+                    fetch(URL + 'futbolintenacional/' + this.Id_Jugador)
+                        .then(response => response.json())
+                        .then(data => {
+                            this.Jugador = data.Jugador;
+                            this.cantidad = data.cantidad;
+                            this.Equipo = data.Equipo;
+                            this.Posicion = data.Posicion;
+                            this.Liga =  data.Liga;
+                            this.valor =  data.valor;
+                            this.mostrarDatosProducto = true;
+                        })
+                        .catch(error => console.error('Error:', error));
+                },
+                
+                
+                guardarCambios() {
+                    const formData = new FormData();
+                    formData.append('codigo', this.Id_Jugador);
+                    formData.append('Jugador', this.Jugador);
+                    formData.append('Equipo', this.Equipo);
+                    formData.append('Posicion', this.Posicion);
+                    formData.append('Liga', this.Liga);
+                    formData.append('valor', this.valor);
+
+                    
+
+                    fetch(URL + 'futbolintenacional/' + this.Id_Jugador, {
+                        method: 'PUT',
+                        body: formData,
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            alert('jugador actualizado correctamente');
+                            this.limpiarFormulario();
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error al actualizar el jugador');
+                        });
+                },
+                limpiarFormulario() {
+                    this.Id_Jugador = '';
+                    this.Jugador = '';
+                    this.Equipo= '';
+                    this.Posicion = '';
+                    this.Liga = '';
+                    this.valor = null;                    
+                    this.mostrarDatosProducto = false;
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+
+</body>
+</html>

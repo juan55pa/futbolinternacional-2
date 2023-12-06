@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="hoverheader.css">
+    <link rel="icon" type="image/jpg"
+        href="https://static.vecteezy.com/system/resources/previews/009/784/979/non_2x/soccer-ball-icon-isolated-on-white-background-free-vector.jpg" />
+    <!-- Importar fuente roboto de google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <!-- -------------------------------------- -->
+    <title>Somos deporte</title>
+</head>
+<header>
+    <h1>
+        <!-- <img src="https://img.freepik.com/psd-premium/balon-futbol-aislado-render-3d_286925-255.jpg"> -->
+        <img
+            src="https://w7.pngwing.com/pngs/260/649/png-transparent-fc-barcelona-football-drawing-futsal-pelota-futbol-game-monochrome-sports-equipment.png">
+        <b>Somos deporte</b>
+
+    </h1>
+    <!-- ---------------------------------------------------- -->
+    <nav>
+        <a href="index.html">INICIO</a>
+        <a href="listado.html">LISTADO</a>
+        <a href="altas.html">ALTAS</a>
+        <a href="eliminar.html">ELIMINAR</a>
+        <a href="modificar.html">MODIFICAR</a>
+        <div class="animation start-altas"></div>
+    </nav>
+    <!-- ---------------------------------------------------- -->
+</header>
+<!-- ----------------------------------------------------  ---------------------------------------------------- -->
+
+
+
+<body>
+<center><h1> ALTA DE JUGADORES</h1></center>
+    <center><div class="formularios">
+        <!--enctype="multipart/form-data es necesario para enviar archivos al back.-->
+        <form id="formulario" enctype="multipart/form-data" >
+            <div class="dentro_formularios">
+                <label for="Id_Jugador">Id Jugador:</label>
+            </div>
+            <div class="relleno_formularios">
+                <input type="number" id="Id_Jugador" name="Id_Jugador" required><br>
+            </div>
+            <div class="dentro_formularios">
+                <label for="Jugador">Jugador :</label>
+            </div>
+            <div class="relleno_formularios">
+                <input type="text" id="Jugador" name="Jugador" required><br>
+            </div>
+            <div class="dentro_formularios">
+                <label for="Posicion">Posicion:</label>
+            </div>
+            <div class="relleno_formularios">
+                <select id="Posicion" name="Posicion" required>
+                    <option value="">Selecciona Posicion</option>
+                    <option value="Portero">Portero</option>
+                    <option value="Lateral izquierdo">Lateral izquierdo</option>
+                    <option value="Defensa central">Defensa central</option>
+                    <option value="Lateral derecho">Lateral derecho</option>
+                    <option value="Pivote">Pivote</option>
+                    <option value="Mediocentro">Mediocentro</option>            
+                    <option value="Interior derecho">Interior derecho</option>
+                    <option value="Interior izquierdo">Interior izquierdo</option>
+                    <option value="Mediocentro ofensivo">Mediocentro ofensivo</option>
+                    <option value="Mediapunta">Mediapunta</option>
+                    <option value="Extremo derecho">Extremo derecho</option>
+                    <option value="Extremo izquierdo">Extremo izquierdo</option>
+                    <option value="Delantero centro">Delantero centro</option>   
+                </select>
+            </div>    
+            <div class="dentro_formularios">
+                <label for="Equipo">Equipo .:</label>
+            </div>
+            <div class="relleno_formularios">
+                <input type="text" id="Equipo" name="Equipo" required><br>
+            </div>
+            <div class="dentro_formularios">
+                <label for="Liga">Liga   :</label>     
+            </div>
+            <div class="relleno_formularios">   
+                <select id="Liga" name="Liga" required>
+                    <option value="">Selecciona una liga</option>
+                    <option value="ALEMANIA">ALEMANIA</option>
+                    <option value="ARGENTINA">ARGENTINA</option>
+                    <option value="BRASIL">BRASIL</option>
+                    <option value="ESPAÑA">ESPAÑA</option>
+                    <option value="INGLATERRA">INGLATERRA</option>
+                    <option value="ITALIA">ITALIA</option>     
+                </select>     
+            </div>
+            <div class="dentro_formularios">
+                <label for="valor">Valor:</label>
+            </div>
+            <div class="relleno_formularios">
+                <input type="number" step="100000"id="valor" name="valor" required><br>
+            </div>
+                
+            <div>
+                <center><button type="submit" class="button">Agregar Producto</button></center>
+            </div>
+        </form>
+    </div></center>
+
+    <script>
+        const URL = "http://127.0.0.1:5000/"
+        //const URL = "https://arielfsp.pythonanywhere.com/"
+
+        // Capturamos el evento de envío del formulario
+        document.getElementById('formulario').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitamos que se envie el form 
+
+            let formData = new FormData();
+            formData.append('Id_Jugador', document.getElementById('Id_Jugador').value);
+            formData.append('Jugador', document.getElementById('Jugador').value);
+            formData.append('Posicion', document.getElementById('Posicion').value);
+            formData.append('Equipo', document.getElementById('Equipo').value);
+            formData.append('Liga', document.getElementById('Liga').value);
+            formData.append('valor', document.getElementById('valor').value);
+            
+            
+            ;
+            fetch(URL + 'futbolintenacional', {
+                method: 'POST',
+                body: formData // Aquí enviamos formData en lugar de JSON
+            })
+            .then(function (response) {
+                if (response.ok) { return response.json(); }
+            })
+            .then(function (data) {
+                alert('Jugador agregado correctamente.');
+                // Limpiar el formulario para el proximo producto
+                document.getElementById('Id_Jugador').value = "";
+                document.getElementById('Jugador').value = "";
+                document.getElementById('Posicion').value = "";
+                document.getElementById('Equipo').value = "";
+                document.getElementById('Liga').value = "";
+                document.getElementById('valor').value = "";
+            })
+            .catch(function (error) {
+                // Mostramos el error, y no limpiamos el form.
+                alert('Error al agregar el Jugador.');
+            });
+            
+        })
+    </script>
+</body>
+
+</html>

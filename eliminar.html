@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="hoverheader.css">
+    <link rel="icon" type="image/jpg"
+        href="https://static.vecteezy.com/system/resources/previews/009/784/979/non_2x/soccer-ball-icon-isolated-on-white-background-free-vector.jpg" />
+    <!-- Importar fuente roboto de google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <!-- -------------------------------------- -->
+    <title>Somos deporte</title>
+</head>
+<header>
+    <h1>
+        <!-- <img src="https://img.freepik.com/psd-premium/balon-futbol-aislado-render-3d_286925-255.jpg"> -->
+        <img
+            src="https://w7.pngwing.com/pngs/260/649/png-transparent-fc-barcelona-football-drawing-futsal-pelota-futbol-game-monochrome-sports-equipment.png">
+        <b>Somos deporte</b>
+
+    </h1>
+    <!-- ---------------------------------------------------- -->
+    <nav>
+        <a href="index.html">INICIO</a>
+        <a href="listado.html">LISTADO</a>
+        <a href="altas.html">ALTAS</a>
+        <a href="eliminar.html">ELIMINAR</a>
+        <a href="modificar.html">MODIFICAR</a>
+        <div class="animation start-eliminar"></div>
+    </nav>
+    <!-- ---------------------------------------------------- -->
+</header>
+<!-- ----------------------------------------------------  ---------------------------------------------------- -->
+<body>
+<div class="eliminar"></div>
+    <table>
+        <thead>
+            <tr> 
+                <th>Id_Jugador</th>
+                <th>Jugador</th>
+                <th>Equipo</th>
+                <th align="right">Posicion</th>
+                <th>Liga</th>
+                <th>valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="jugador in futbolintenacional">
+                <td>{{ jugador.Id_Jugador }}</td>
+                <td>{{ jugador.Jugador }}</td>
+                <td>{{ jugador.Equipo }}</td>
+                <td align="right">{{ jugador.Posicion }}</td>
+                <td>{{ jugador.Liga }}</td>
+                <td>{{ jugador.valor }}</td>
+                <td><button @click="eliminarJugador(jugador.Id_Jugador)">Eliminar</button></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const URL = "http://127.0.0.1:5000/"
+        //const URL = "https://arielfsp.pythonanywhere.com/"
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    futbolintenacional: []
+                }
+            },
+            methods: {
+                obtenerJugadores() {
+                    // Obtenemos el contenido del inventario
+                    fetch(URL + 'futbolintenacional')
+                        .then(response => {
+                             // Parseamos la respuesta JSON 
+                            if (response.ok) { return response.json();}
+                        })
+                        .then(data => {
+                            // El código Vue itera este elemento para generar la tabla
+                            this.futbolintenacional = data;
+                        })
+                        .catch(error => {
+                            console.log('Error:', error);
+                            alert('Error al obtener los productos.');
+                        });
+                },
+                eliminarJugador(Id_Jugador) {
+                    if (confirm('¿Estás seguro de que quieres eliminar este jugador?')) {
+                        fetch(URL + `futbolintenacional/${Id_Jugador}`, { method: 'DELETE' })
+                            .then(response => {
+                                if (response.ok) {
+                                    // Eliminar el jugador de la lista de jugadores en Vue.js
+                                    this.futbolintenacional = this.futbolintenacional.filter(jugador => jugador.Id_Jugador !== Id_Jugador);
+                                    alert('Jugador eliminado correctamente.');
+                                }
+                            })
+                            .catch(error => {
+                                alert(error.message);
+                            });
+                    }
+                }
+
+                    
+                
+            },
+            mounted() {
+                //Al cargar la página, obtenemos la lista de productos
+                this.obtenerJugadores();
+            }
+        });
+
+        app.mount('body');
+    </script>
+</body>
+</html>
